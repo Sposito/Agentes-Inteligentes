@@ -2,11 +2,18 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
+import java.util.Arrays;  
+import java.util.List;  
+import java.util.ArrayList; 
+
 public class Librarian extends Agent {
 	
-	String[] availableBooks = new String[]{"A", "B", "C", "D", "E"};
+	String[] availableBooksArray = new String[]{"The Lusiads", "Dom Casmurro", "Vidas Secas", "The Hour of the Star", "The Book of Disquiet"};
+	List<String> availableBooks;
+	
 	@Override
 	protected void setup(){
+		availableBooks = Arrays.asList(availableBooksArray);
 		super.setup();
 		this.addBehaviour(new ReceiverBehaviour() );
 		System.out.println("Librarian agent ready to listen.");
@@ -28,11 +35,18 @@ public class Librarian extends Agent {
 			ACLMessage msg = receive();
 			
 			if (msg != null){
-				System.out.println(String.format(
-						"Message received from %s, which says: \' %s \'",
-						msg.getSender().getName(),
-						msg.getContent()
-					));
+				String librarianLine = "Librarian: ";
+				String messageContent = msg.getContent();
+				if (availableBooks.contains(messageContent) ){
+					librarianLine += "Book " + messageContent + " just borrowed.";
+				}
+				
+				else{
+					librarianLine += "For gosh sake! We don't have this kind of book here!!";
+				}
+				
+				System.out.println(librarianLine);
+				
 				
 			}
 		}
