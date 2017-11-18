@@ -1,7 +1,7 @@
 import jade.core.Runtime;
-import jade.wrapper.ContainerController;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
+import jade.wrapper.ContainerController;
 import jade.wrapper.AgentController;
 
 class MainContainer {
@@ -13,7 +13,7 @@ class MainContainer {
 		MainContainer mainContainer = new MainContainer();
 		
 		mainContainer.initMainContainerInPlatform("localhost", "9898", "MainContainer");
-		mainContainer.startAgentInPlatform("BorrowerAgent", "Borrower");
+		mainContainer.startAgentInPlatform("BorrowerSpanerAgent", "BorrowerSpawner");
 		mainContainer.startAgentInPlatform("LibrarianAgent", "Librarian");
 	}
 	
